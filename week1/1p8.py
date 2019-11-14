@@ -19,11 +19,11 @@ getNumbers() = O(n)
 """
 
 
-
 def gcd(a, b):
     if b == 0:
-      return a
+        return a
     else:
-      return gcd(b, a % b)
+        return gcd(b, a % b)
 
-print (gcd(144,873))
+
+print(gcd(144, 873))
