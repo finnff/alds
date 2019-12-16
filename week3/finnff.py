@@ -5,67 +5,6 @@ import math
 import gomoku
 import time
 
-"""
-WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET 
-WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET 
-
-bij winning move eindigt spel niet? maar word er gevraagd om een extra move(die niet werkt omdat game terminal is door win)
-hierdoor crashed na het winnen?::
-
-best posible move:  (0, 4)
-o o o o - x o - - x o o - - - - - x - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- x - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - x - - - - - 
-- - - - - - - - - x - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - x - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - x 
-
-WIN FLAG IN COMPETITION.PY
-best posible move:  None
-[]
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-- - - - - - - - - - - - - - - - - - - 
-
-Traceback (most recent call last):
-  File "competition.py", line 105, in <module>
-    comp.play_competition()
-  File "competition.py", line 60, in play_competition
-    ok, win = game.move(move)
-  File "/home/sga/cpp/alds/week3/gomoku.py", line 150, in move
-    if move_tuple[0] < 0 or move_tuple[0] >= self.bsize or move_tuple[1] < 0 or move_tuple[1] >= self.bsize:
-TypeError: 'NoneType' object is not subscriptable
-
-"""
 
 
 class Node:
