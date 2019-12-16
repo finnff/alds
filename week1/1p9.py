@@ -12,7 +12,7 @@ n:
 
 Return
 -------
-  null, but print all Primes between 2 and n
+    null, but print all Primes between 2 and n
 
 
 sieve() = O(n^2)
@@ -21,14 +21,15 @@ sieve() = O(n^2)
 
 def sieve(n):
     multiples = []
+    primes = []
     for i in range(2, n+1):
         if i not in multiples:
-            print(i)
+            # print(i)
+            primes.append(i)
             for j in range(i*i, n+1, i):
                 multiples.append(j)
 
-
-# sieve(50000)
+    return primes
 
 
 # 4 de sieve of Eratosthenes kan op meerdere wijzes geimplementeerd worden,
@@ -44,6 +45,5 @@ def eratosthenes2(n):
             multiples.update(range(i*i, n+1, i))
 
 
-print(list(eratosthenes2(10000)))
-
-
+# print(sieve(50000))
+list(eratosthenes2(10000000))
