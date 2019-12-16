@@ -53,8 +53,7 @@ class competition:
                     move = current_player.move(game.current_board(
                     ), game.previous_move, game.valid_moves(), max_time_to_move=maxtime_per_move)
                     stop_time = time.time_ns()
-                    gomoku.prettyboard(game.current_board())
-                    print()
+                    # gomoku.prettyboard(game.current_board())
                     # print(str((stop_time-start_time)/1000000)+"/"+str(maxtime_per_move*(1+tolerance)))
                     # perform the move, and obtain whether the move was valid (ok) and whether the move results in a win
                     ok, win = game.move(move)
@@ -74,7 +73,6 @@ class competition:
                         else:
                             print("as white")
                     if win:
-                        print("WIN FLAG IN COMPETITION.PY")
                         over = True
                         self.results[pid][pid_other] += 1
                     elif len(game.valid_moves()) == 0:
@@ -97,9 +95,13 @@ class competition:
 # At present the competition consists of just three random dummy players playing each other
 # When the students submit a player file, they should be entered one by one.
 game = gomoku.gomoku_game()
+player1 = random_player.random_dummy_player()
+player2 = random_player.random_dummy_player()
 player3 = random_player.random_dummy_player()
 player4 = finnff.finnff()
 comp = competition()
+comp.register_player(player1)
+comp.register_player(player2)
 comp.register_player(player3)
 comp.register_player(player4)
 comp.play_competition()

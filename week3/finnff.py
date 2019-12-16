@@ -10,8 +10,7 @@ WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WER
 WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET WERKT NIET 
 
 bij winning move eindigt spel niet? maar word er gevraagd om een extra move(die niet werkt omdat game terminal is door win)
-hierdoor crashed na het winnen?:
-
+hierdoor crashed na het winnen?::
 
 best posible move:  (0, 4)
 o o o o - x o - - x o o - - - - - x - 
@@ -68,13 +67,14 @@ TypeError: 'NoneType' object is not subscriptable
 
 """
 
+
 class Node:
-    def __init__(self, board, last_move, valid_moves, parent=None):
+    def __init__(self, board, last_move, valid_moves, color, parent=None):
         self.board = board
         self.valid_moves = valid_moves
         self.children = []
         self.parent = parent
-        # self.color = color
+        self.color = color
         self.last_move = last_move
         self.visits = 0
         self.Q = 0
@@ -86,14 +86,14 @@ class Node:
         # print("explaning", nRoot)
         # if this node is terminal, end
         # print("findspot")
-        if len(nRoot.valid_moves)==0:
+        if len(nRoot.valid_moves) == 0:
             return nRoot
         # # if there are nodes to make
         if len(nRoot.children) < len(nRoot.valid_moves):
             game = gomoku.gomoku_game(19, nRoot.board)
             move = nRoot.valid_moves[len(nRoot.children)]
             game.move(move)
-            NewNode = Node(nRoot.board, move, nRoot.valid_moves)
+            NewNode = Node(nRoot.board, move, nRoot.valid_moves, nRoot.color)
             NewNode.parent = nRoot
             nRoot.children.append(NewNode)
             return NewNode
@@ -128,14 +128,21 @@ class finnff:
 
     def __init__(self, black_=True):
         """Constructor for the player."""
-        self.black = black_
+        self.colour = black_
+        self.s0 = None
+        self.leaf = None
 
     def new_game(self, black_):
         """At the start of each new game you will be notified by the competition.
         this method has a boolean parameter that informs your agent whether you
         will play black or white.
         """
-        self.black = black_
+        self.reset = True
+        self.colour = black_
+        self.s0 = None
+        self.leaf = None
+
+            
 
     def rollout(self, leafnode):
         if leafnode is not None:
@@ -151,7 +158,7 @@ class finnff:
                 if simgame.check_win(lm):
                     return 1.0
                 if len(simgame.valid_moves()) == 0:
-                    print("DRAW")
+                    # print("DRAW")
                     return 0.5
                 else:
                     return 0
@@ -170,10 +177,6 @@ class finnff:
             turn = True
             noden = noden.parent
 
-    def __getitem__(self, value):
-        # anders werkt gomoku.py niet?
-        return self
-
     def move(self, board, last_move, valid_moves, max_time_to_move=1000):
         """This is the most important method: the agent will get:
         1) the current state of the board
@@ -183,22 +186,24 @@ class finnff:
         """
         startime = time.time_ns()
         currtime = time.time_ns()
-        s0 = Node(board, last_move, valid_moves)
+        s0 = Node(board, last_move, valid_moves, self.colour)
+        if(self.colour and self.reset):
+            self.reset = False
+            # print("RESET")
+            return(9,9)
         # while (currtime<startime+(max_time_to_move*1000)):
-        for i in range(0, 250):
+        for i in range(0, 179):
             leaf = s0.findSpotToExpand(s0)
             val = self.rollout(leaf)
             self.backupval(val, leaf)
         currtime = time.time_ns()
 
         if(leaf is None):
-            return()       
+            return()
 
-        print("best posible move: ",leaf.last_move)
+        # print("best posible move: ", leaf.last_move)
         if (leaf.last_move is None):
             print(s0.valid_moves)
-            # return(s0.valid_moves[0])
+            # return(10,10)
         else:
             return (leaf.last_move)
-        
-        
