@@ -21,7 +21,11 @@ def find(arr, n):
         return -1
     if arr[0] == n:
         return 0
-    return (1 + find(arr[1:], n))
+    temp = find(arr[1:], n)
+    if temp is not -1:
+        return (1 + temp, n)
+    else:
+        return -1
 
 
 list0 = []

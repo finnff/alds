@@ -1,30 +1,77 @@
-Availible = [10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
-Output = []
 
 
-def PaymentCalc(Amount, Availible, Output):
-    if (Amount < 0):
+"""
+Parameters
+--------
+I:
+    int
+    Number used in recursion to keep track of matrix position
+
+J:
+  int
+  Input amount that is being calculated
+
+coins:
+    list
+    List of availible Coin/Banknotes that amount can be payed in.
+
+A:
+    nested list
+    Matrix used for the calculation of posibilitys of paying amount J.
+
+
+Return
+-------
+  Amount of  different distinct combinations of coins
+  and bank notes the input can be paid in.
+
+
+"""
+
+
+def amounthandler(I, J, coins, A):
+    if J < 0:
         return 0
-    # if (Amount == 1):
-    #     Output.append(1)
-    #     Amount-=1
-
-    if (len(Output) >= len(Availible)):
-        for i in range(len(Output)):
-            if(Output[i] != 0):
-                print("%i of %i cents" % (Output[i], Availible[i]))
-        return Output
-    else:
-        if(Amount >= Availible[len(Output)]):
-            temp = 0
-            for _ in range(0, (Amount / Availible[len(Output)])):
-                temp += 1
-            Amount = Amount-(temp*Availible[len(Output)])
-            Output.append(temp)
-            PaymentCalc(Amount, Availible, Output)
-        else:
-            Output.append(0)
-            PaymentCalc(Amount, Availible, Output)
+    if A[I][J] == -1:
+        if J == 0:
+            A[I][J] = 1
+        elif I == 0:
+            A[I][J] = 1
+        elif J >= coins[I]:
+            A[I][J] = amounthandler(
+                I-1, J, coins, A) + amounthandler(I, J-coins[I], coins, A)
+        elif J < coins[I]:
+            A[I][J] = amounthandler(
+                I-1, J, coins, A)
+    return A[I][J]
 
 
-PaymentCalc(372, Availible, Output)
+"""
+Parameters
+--------
+amount:
+  int
+  Input amount
+
+Return
+-------
+  Amount of  different distinct combinations of coins
+  and bank notes the input can be paid in.
+
+"""
+
+
+def possibiltyCalc(amount):
+    coins = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000]
+    matrix = []
+    value = []
+
+    for _ in range(amount+1):
+        value.append(-1)
+    for _ in range(len(coins)):
+        matrix.append(value)
+
+    return amounthandler(12, amount, coins, matrix)
+
+
+print(possibiltyCalc(4))

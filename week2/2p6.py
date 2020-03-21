@@ -18,7 +18,7 @@ class PrioQue():
 
     def dequeue(self):
         temp = min(self.arr)
-        self.arr.remove(min(self.arr))
+        self.arr.remove(temp)
         return temp
 
     def contains(self, value):
@@ -36,25 +36,18 @@ class PrioQue():
 
 q = PrioQue()
 q.queue(15, 2)
-q.queue(15, 2)
-q.queue(15, 2)
-q.queue(15, 8)
-q.queue(15, 17)
-q.queue(15, 9)
-q.queue(15, 7)
-q.queue(92, 1)
+q.queue(92, 4)
 q.queue(128, 1)
 q.queue(52, 1)
-q.queue(81, 1)
 q.queue(73, 14)
 q.queue(5, 8)
 print(q.contains(15))
 print(q.dequeue())
 q.remove(15)
+print(q.contains(15))
 q.queue(28, 1)
 q.queue(73, 14)
 q.queue(5, 8)
-print(q.contains(15))
 print(q.dequeue())
 print(q)
 

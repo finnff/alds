@@ -10,4 +10,4 @@ l.append(6)
 l.delete(0)
 
 print(l.min())
-# l.print()
+l.print()

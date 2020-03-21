@@ -1,5 +1,4 @@
 import Stack
-stack = Stack.myStack()
 
 
 def BracketCheck(string):
@@ -20,6 +19,7 @@ def BracketCheck(string):
 
     left = "<{(["
     right = ">})]"
+    stack = Stack.myStack()
     for char in string:
         if char in left:
             stack.push(char)
@@ -28,9 +28,14 @@ def BracketCheck(string):
             stack.pop()
         elif char in right:
             return False
-    return True
+    if stack.isEmpty():
+        return True
+    else:
+        return False
 
 
 print(BracketCheck("[{<<[]>>}]{}[[]]"))
 print(BracketCheck("<<<[]]]{][]{]()))[[]]{}][}[[]]"))
+print(BracketCheck("[][][][][][][{{}}]"))
+print(BracketCheck("ahu[sdajsd[ja]skj]ladokja"))
 print(BracketCheck(""))

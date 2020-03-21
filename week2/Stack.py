@@ -1,6 +1,6 @@
 class myStack():
     """container that functions as a stack, with isEmpty,push, pop,
-    and peek functions
+    and peek functions initialization requires no parameters
     """
 
     def __init__(self):
@@ -9,7 +9,7 @@ class myStack():
         self.arr = []
 
     def isEmpty(self):
-        """Checks if stack is empty, and returns a boolean
+        """boolean Check if stack is empty, and returns a true/false
         """
         if(self.arr == []):
             return True
@@ -17,18 +17,20 @@ class myStack():
             return False
 
     def push(self, x):
-        """Appends x to the Stack
+        """addes x to the Stack
         """
         self.arr.append(x)
 
     def pop(self):
         """Removes the last item from the Stack and returns this value
         """
-        return(self.arr.pop())
+        if not self.isEmpty():
+            return(self.arr.pop())
+        return None
 
     def peek(self):
-        """Returns the last item on the stack
+        """Returns the last item on the stack without removing it
         """
-        return self.arr[-1]
-
-
+        if not self.isEmpty():
+            return self.arr[-1]
+        return None

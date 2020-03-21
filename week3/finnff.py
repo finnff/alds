@@ -37,6 +37,7 @@ class Node:
             nRoot.children.append(NewNode)
             return NewNode
         if len(nRoot.children) >= len(nRoot.valid_moves):
+            # print(id(nRoot))
             # print(nRoot.children[1].valid_moves)
             bestc = nRoot.best_child(nRoot)
             # print("CALLING with",  len(nRoot.children))
@@ -50,7 +51,7 @@ class Node:
                 if node.UCB1() > best_node.UCB1():
                     # print("Evaluating : ",best_node.last_move, node.UCB1(), " vs ", best_node.UCB1())
                     best_node = node
-                    # print(best_node, " with ", best_node.UCB1())
+                    print(best_node, " with ", best_node.UCB1(), " with move ", best_node.last_move)
             return best_node
 
 

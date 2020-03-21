@@ -2,6 +2,8 @@ import gomoku
 import random_player
 import finnff
 import time
+import youribot
+import wouterbot
 
 
 class competition:
@@ -54,6 +56,7 @@ class competition:
                     ), game.previous_move, game.valid_moves(), max_time_to_move=maxtime_per_move)
                     stop_time = time.time_ns()
                     # gomoku.prettyboard(game.current_board())
+                    # print()
                     # print(str((stop_time-start_time)/1000000)+"/"+str(maxtime_per_move*(1+tolerance)))
                     # perform the move, and obtain whether the move was valid (ok) and whether the move results in a win
                     ok, win = game.move(move)
@@ -95,14 +98,14 @@ class competition:
 # At present the competition consists of just three random dummy players playing each other
 # When the students submit a player file, they should be entered one by one.
 game = gomoku.gomoku_game()
-player1 = random_player.random_dummy_player()
-player2 = random_player.random_dummy_player()
-player3 = random_player.random_dummy_player()
+# player1 = random_player.random_dummy_player()
+player2 = wouterbot.yasuo()
+player3 = youribot.mlgpro()
 player4 = finnff.finnff()
 comp = competition()
-comp.register_player(player1)
+# comp.register_player(player1)
 comp.register_player(player2)
-comp.register_player(player3)
+comp.register_player(player3) 
 comp.register_player(player4)
 comp.play_competition()
 comp.print_scores()
